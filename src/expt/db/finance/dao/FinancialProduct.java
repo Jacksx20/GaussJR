@@ -7,11 +7,11 @@ import java.sql.SQLException;
 
 public class FinancialProduct {
     private Connection conn;
-
+    
     public FinancialProduct(Connection connection) {
         conn = connection;
     }
-
+    
     public ResultSet queryProductList() {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -28,10 +28,10 @@ public class FinancialProduct {
                 ex = ex.getNextException();
             }
         }
-
+        
         return rs;
     }
-
+    
     public ResultSet queryProductById(int product_id) {
         PreparedStatement pstat = null;
         ResultSet rs = null;

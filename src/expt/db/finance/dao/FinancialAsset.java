@@ -8,11 +8,11 @@ import expt.db.finance.Const;
 
 public class FinancialAsset {
     private Connection conn;
-
+    
     public FinancialAsset(Connection connection) {
         conn = connection;
     }
-
+    
     public ResultSet queryAssetList() {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -32,7 +32,7 @@ public class FinancialAsset {
         }
         return rs;
     }
-
+    
     public ResultSet queryAssetById(int asset_id) {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -53,7 +53,7 @@ public class FinancialAsset {
         }
         return rs;
     }
-
+    
     public ResultSet queryAssetByClientId(int client_id) {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -74,7 +74,7 @@ public class FinancialAsset {
         }
         return rs;
     }
-
+    
     public boolean insertAssetRecord(int asset_id, int client_id, int product_id, int asset_type, int quantity) {
         PreparedStatement pstat = null;
 
@@ -91,7 +91,7 @@ public class FinancialAsset {
             pstat.setInt(7, 0);
             pstat.setDate(8, new java.sql.Date(new java.util.Date().getTime()));
             pstat.execute();
-
+            
             return Const.SUCCEED;
         } catch (SQLException ex) {
             System.err.println("SQLException information");
@@ -102,7 +102,7 @@ public class FinancialAsset {
             return Const.FAILED;
         }
     }
-
+    
     public boolean deleteAssetRecordById(int asset_id) {
         PreparedStatement pstat = null;
 
@@ -110,7 +110,7 @@ public class FinancialAsset {
             pstat = conn.prepareStatement("DELETE from financial_asset where a_id = ?");
             pstat.setInt(1, asset_id);
             pstat.execute();
-
+            
             return Const.SUCCEED;
         } catch (SQLException ex) {
             System.err.println("SQLException information");
@@ -121,7 +121,7 @@ public class FinancialAsset {
             return Const.FAILED;
         }
     }
-
+    
     public int countOfAssetRecords(int clientId) {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -131,7 +131,7 @@ public class FinancialAsset {
             pstat = conn.prepareStatement("select count(*) as RECORDSCOUNT from financial_asset where a_client_id = ?");
             pstat.setInt(1, clientId);
             rs = pstat.executeQuery();
-
+            
             if (rs.next()) {
                 recordsCount = rs.getInt("RECORDSCOUNT");
             }
