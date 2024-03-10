@@ -32,9 +32,9 @@ public class CardAsset {
         return rs;
     }
 
-    public boolean queryDepositAndWithdrawal(String cardNum, int action, int money) {
+    public boolean queryDepositAndWithdrawal(String cardNum,int action,int money) {
         PreparedStatement pstat = null;
-        if (action == 2) {
+        if (action == 2){
             money = 0 - money;
         }
         try {
@@ -52,8 +52,7 @@ public class CardAsset {
             return Const.FAILED;
         }
     }
-
-    public boolean insertCardAsset(String card_number) {
+    public boolean insertCardAsset (String card_number){
         PreparedStatement pstat = null;
 
         try {
@@ -74,8 +73,7 @@ public class CardAsset {
             return Const.FAILED;
         }
     }
-
-    public boolean deleteCardAsset(String card_number) {
+    public boolean deleteCardAsset (String card_number){
         PreparedStatement pstat = null;
 
         try {

@@ -6,13 +6,14 @@ import expt.db.finance.Const;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+
 public class Client {
     private Connection conn;
-
+    
     public Client(Connection connection) {
         conn = connection;
     }
-
+    
     public ResultSet queryClientList() {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -29,10 +30,10 @@ public class Client {
                 ex = ex.getNextException();
             }
         }
-
+        
         return rs;
     }
-
+    
     public ResultSet queryClientById(int id) {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -52,7 +53,7 @@ public class Client {
         }
         return rs;
     }
-
+    
     public boolean insertClient(int id, String name, String id_card, String phone_number, String email) {
         PreparedStatement pstat = null;
 
@@ -65,7 +66,7 @@ public class Client {
             pstat.setString(4, phone_number);
             pstat.setString(5, email);
             pstat.execute();
-
+            
             return Const.SUCCEED;
         } catch (SQLException ex) {
             System.err.println("SQLException information");
@@ -73,11 +74,11 @@ public class Client {
                 System.err.println("Error msg: " + ex.getMessage());
                 ex = ex.getNextException();
             }
-
+            
             return Const.FAILED;
         }
     }
-
+    
     public boolean updateClient(int id, String name, String phone_number, String email) {
         PreparedStatement pstat = null;
 
@@ -88,7 +89,7 @@ public class Client {
             pstat.setString(3, email);
             pstat.setInt(4, id);
             pstat.execute();
-
+            
             return Const.SUCCEED;
         } catch (SQLException ex) {
             System.err.println("SQLException information");
@@ -96,11 +97,11 @@ public class Client {
                 System.err.println("Error msg: " + ex.getMessage());
                 ex = ex.getNextException();
             }
-
+            
             return Const.FAILED;
         }
     }
-
+    
     public boolean deleteClient(int id) {
         PreparedStatement pstat = null;
 
@@ -108,7 +109,7 @@ public class Client {
             pstat = conn.prepareStatement("DELETE from client where c_id = ?");
             pstat.setInt(1, id);
             pstat.execute();
-
+            
             return true;
         } catch (SQLException ex) {
             System.err.println("SQLException information");

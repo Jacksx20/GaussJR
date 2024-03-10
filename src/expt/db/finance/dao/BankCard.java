@@ -9,11 +9,11 @@ import expt.db.finance.Const;
 
 public class BankCard {
     private Connection conn;
-
+    
     public BankCard(Connection connection) {
         this.conn = connection;
     }
-
+    
     public ResultSet queryBankCardList() {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -30,10 +30,10 @@ public class BankCard {
                 ex = ex.getNextException();
             }
         }
-
+        
         return rs;
     }
-
+    
     public ResultSet queryBankCardByCardNumber(String bank_card_number) {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -53,7 +53,7 @@ public class BankCard {
         }
         return rs;
     }
-
+    
     public ResultSet queryBankCardByClientId(int clientId) {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -73,7 +73,7 @@ public class BankCard {
         }
         return rs;
     }
-
+    
     public int countOfBankCards(int clientId) {
         PreparedStatement pstat = null;
         ResultSet rs = null;
@@ -83,7 +83,7 @@ public class BankCard {
             pstat = conn.prepareStatement("select count(*) as RECORDSCOUNT from bank_card where b_client_id = ?");
             pstat.setInt(1, clientId);
             rs = pstat.executeQuery();
-
+            
             if (rs.next()) {
                 recordsCount = rs.getInt("RECORDSCOUNT");
             }
@@ -96,7 +96,7 @@ public class BankCard {
         }
         return recordsCount;
     }
-
+    
     public boolean insertBankCard(String card_number, String card_type, int client_id) {
         PreparedStatement pstat = null;
 
@@ -107,7 +107,7 @@ public class BankCard {
             pstat.setString(2, card_type);
             pstat.setInt(3, client_id);
             pstat.execute();
-
+            
             return Const.SUCCEED;
         } catch (SQLException ex) {
             System.err.println("SQLException information");
@@ -115,7 +115,7 @@ public class BankCard {
                 System.err.println("Error msg: " + ex.getMessage());
                 ex = ex.getNextException();
             }
-
+            
             return Const.FAILED;
         }
     }
@@ -127,7 +127,7 @@ public class BankCard {
             pstat = conn.prepareStatement("DELETE from bank_card where b_number = ?");
             pstat.setString(1, bank_card_number);
             pstat.execute();
-
+            
             return true;
         } catch (SQLException ex) {
             System.err.println("SQLException information");
