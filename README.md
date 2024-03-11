@@ -8,7 +8,4 @@ cd src/expt/db/finance/
 
 javac -encoding utf-8 -classpath ../../../ -d . *.java
 
-java -p GaussJR/lib/opengauss-jdbc-5.0.1.jar expt.db.finance.launch
-
-
-D:\Desktop\GaussJR\libs\opengauss-jdbc-2.0.0.jar
+java -p /d/Desktop/GaussJR/libs/opengauss-jdbc-2.0.0.jar expt.db.finance.launch
