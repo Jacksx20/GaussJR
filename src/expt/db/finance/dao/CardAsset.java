@@ -59,7 +59,7 @@ public class CardAsset {
         PreparedStatement pstat = null;
 
         try {
-            pstat = conn.prepareStatement("");
+            pstat = conn.prepareStatement("insert into card_asset (card_num, card_money, moneytype) values(?,?,?)");
             pstat.setString(1, card_number);
             pstat.setInt(2, 0);
             pstat.setString(3, "人民币");
