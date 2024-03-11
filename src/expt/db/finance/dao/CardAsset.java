@@ -78,11 +78,12 @@ public class CardAsset {
         }
     }
 
+    // 客户销卡”模块,客户销卡时，删除此卡的存/取款信息
     public boolean deleteCardAsset(String card_number) {
         PreparedStatement pstat = null;
 
         try {
-            pstat = conn.prepareStatement("");
+            pstat = conn.prepareStatement("delete from card_asset where card_num = ?");
             pstat.setString(1, card_number);
 
             pstat.execute();
