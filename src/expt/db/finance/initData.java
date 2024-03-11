@@ -5,72 +5,79 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import expt.db.finance.dao.DBUtils;
 
-
 public class initData {
-    
-    static String[] dataSqls = new String[]{
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (1,'左晓婷','zuoxiaoting@huawei.com','340211199301010001','18815650001');",
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (2,'虞成刚','yuchenggang@huawei.com','340211199301010002','18815650002');",
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (3,'朱长刚','zhuchanggang@huawei.com','340211199301010003','18815650003');",
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (4,'任高峰','rengaofeng@huawei.com','340211199301010004','18815650004');",
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (5,'安艳芳','anyanfang@huawei.com','340211199301010005','18815650005');",
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (6,'滕长丽','tengchangli@huawei.com','340211199301010006','18815650006');",
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (7,'傅小芳','fuxiaofang@huawei.com','340211199301010007','18815650007');",
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (8,'卞兰娟','bianlanjuan@huawei.com','340211199301010008','18815650008');",
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (9,'邵小婷','shaoxiaoting@huawei.com','340211199301010009','18815650009');",
-            "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
-            + "VALUES (10,'章晓峰','zhangxiaofeng@huawei.com','340211199301010010','18815650010');",
-            
-            // bank_card
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000001','信用卡',1);", 
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000002','信用卡',2);", 
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000003','信用卡',3);", 
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000004','信用卡',4);", 
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000005','储蓄卡',5);", 
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000006','储蓄卡',6);", 
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000007','储蓄卡',7);", 
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000008','储蓄卡',8);", 
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000009','储蓄卡',9);", 
-            "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000010','储蓄卡',10);",
-            
-            // finance_product
-            "INSERT INTO finance.financial_product(p_name,p_id,p_description,p_amount,p_year) "
-            + "VALUES ('债券',1,'以国 债、金融央行票据企业为主要投资方向的银理财产品。',50000,6);", 
-            "INSERT INTO finance.financial_product(p_name,p_id,p_description,p_amount,p_year) "
-            + "VALUES ('信贷资产',2,'一般指银行作为委托人将通过发理财产品募集资金给信公司，成立计划产购买理财品发售银行或第三方信贷资。',50000,6);", 
-            "INSERT INTO finance.financial_product(p_name,p_id,p_description,p_amount,p_year) "
-            + "VALUES ('股票',3,'与股票 挂钩的理财产品。目前市场上主要以港股居多',50000,6);", 
-            "INSERT INTO finance.financial_product(p_name,p_id,p_description,p_amount,p_year) "
-            + "VALUES ('大宗商品',4,'与 大宗商品期货挂钩的理财产。 目前市场上主要以挂钩黄金、石油农产品的理财居多。',50000,6);",
-            
-            // finances_asset
-            "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
-            + "VALUES (1, 1, 1, 1, '可用', 4, 8001, '2018-07-01');",
-            "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
-            + "VALUES (2, 2, 2, 1, '可用', 3, 8002, '2018-07-02');",
-            "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
-            + "VALUES (3, 3, 3, 1, '可用', 2, 8003, '2018-07-03');",
-            "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
-            + "VALUES (4, 4, 4, 1, '冻结', 1, 8004, '2018-07-04');"
-    };
 
-    public static void main(String[] args) throws SQLException {
-        Connection conn = DBUtils.getConnect();
-        Statement statement = conn.createStatement();
-        
-        for(String targetSql: dataSqls) {
-            System.out.println(targetSql);
-            statement.execute(targetSql);
+        static String[] dataSqls = new String[] {
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (1,'左晓婷','zuoxiaoting@huawei.com','340211199301010001','18815650001');",
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (2,'虞成刚','yuchenggang@huawei.com','340211199301010002','18815650002');",
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (3,'朱长刚','zhuchanggang@huawei.com','340211199301010003','18815650003');",
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (4,'任高峰','rengaofeng@huawei.com','340211199301010004','18815650004');",
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (5,'安艳芳','anyanfang@huawei.com','340211199301010005','18815650005');",
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (6,'滕长丽','tengchangli@huawei.com','340211199301010006','18815650006');",
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (7,'傅小芳','fuxiaofang@huawei.com','340211199301010007','18815650007');",
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (8,'卞兰娟','bianlanjuan@huawei.com','340211199301010008','18815650008');",
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (9,'邵小婷','shaoxiaoting@huawei.com','340211199301010009','18815650009');",
+                        "INSERT INTO finance.client(c_id,c_name,c_mail,c_id_card,c_phone) "
+                                        + "VALUES (10,'章晓峰','zhangxiaofeng@huawei.com','340211199301010010','18815650010');",
+
+                        // bank_card
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000001','信用卡',1);",
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000002','信用卡',2);",
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000003','信用卡',3);",
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000004','信用卡',4);",
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000005','储蓄卡',5);",
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000006','储蓄卡',6);",
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000007','储蓄卡',7);",
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000008','储蓄卡',8);",
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000009','储蓄卡',9);",
+                        "INSERT INTO finance.bank_card(b_number,b_type,b_client_id) VALUES('6222021302020000010','储蓄卡',10);",
+
+                        // finance_product
+                        "INSERT INTO finance.financial_product(p_name,p_id,p_description,p_amount,p_year) "
+                                        + "VALUES ('债券',1,'以国 债、金融央行票据企业为主要投资方向的银理财产品。',50000,6);",
+                        "INSERT INTO finance.financial_product(p_name,p_id,p_description,p_amount,p_year) "
+                                        + "VALUES ('信贷资产',2,'一般指银行作为委托人将通过发理财产品募集资金给信公司，成立计划产购买理财品发售银行或第三方信贷资。',50000,6);",
+                        "INSERT INTO finance.financial_product(p_name,p_id,p_description,p_amount,p_year) "
+                                        + "VALUES ('股票',3,'与股票 挂钩的理财产品。目前市场上主要以港股居多',50000,6);",
+                        "INSERT INTO finance.financial_product(p_name,p_id,p_description,p_amount,p_year) "
+                                        + "VALUES ('大宗商品',4,'与 大宗商品期货挂钩的理财产。 目前市场上主要以挂钩黄金、石油农产品的理财居多。',50000,6);",
+
+                        // finances_asset
+                        "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
+                                        + "VALUES (1, 1, 1, 1, '可用', 4, 8001, '2018-07-01');",
+                        "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
+                                        + "VALUES (2, 2, 2, 1, '可用', 3, 8002, '2018-07-02');",
+                        "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
+                                        + "VALUES (3, 3, 3, 1, '可用', 2, 8003, '2018-07-03');",
+                        "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
+                                        + "VALUES (4, 4, 4, 1, '冻结', 1, 8004, '2018-07-04');",
+                        "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
+                                        + "values (99 , 1, 4, 1,'可用', 1000, 0,'2022-05-31');",
+                        "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
+                                        + "values (98 , 1, 2, 1,'可用', 500, 0, null);",
+                        "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
+                                        + "values (100 , 1, 3, 1,'可用', 2000, 0,'2022-03-08');",
+                        "INSERT INTO financial_asset(a_id, a_client_id, a_product_id, a_type, a_status, a_quantity, a_income, a_purchase_time) "
+                                        + "values (222 , 1, 2, 1,'可用', 6000, 0,'2024-03-08');"
+        };
+
+        public static void main(String[] args) throws SQLException {
+                Connection conn = DBUtils.getConnect();
+                Statement statement = conn.createStatement();
+
+                for (String targetSql : dataSqls) {
+                        System.out.println(targetSql);
+                        statement.execute(targetSql);
+                }
+                System.out.println("complete!");
         }
-        System.out.println("complete!");
-    }
 }

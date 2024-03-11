@@ -50,9 +50,11 @@
 cd src/expt/db/finance/
 
 javac -encoding utf-8 -classpath ../../../ -d . *.java
+---建表
+java -p /d/Desktop/GaussJR/libs/opengauss-jdbc-2.0.0.jar expt.db.finance.initTables
+------时数据同步
+java -p /d/Desktop/GaussJR/libs/opengauss-jdbc-2.0.0.jar expt.db.finance.initData
 
+java -p /d/Desktop/GaussJR/libs/opengauss-jdbc-2.0.0.jar expt.db.finance.testDAO
 java -p /d/Desktop/GaussJR/libs/opengauss-jdbc-2.0.0.jar expt.db.finance.launch
 ```
-
-
-
