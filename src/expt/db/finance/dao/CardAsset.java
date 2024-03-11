@@ -34,13 +34,14 @@ public class CardAsset {
         return rs;
     }
 
+    // 存取款模块
     public boolean queryDepositAndWithdrawal(String cardNum, int action, int money) {
         PreparedStatement pstat = null;
         if (action == 2) {
             money = 0 - money;
         }
         try {
-            pstat = conn.prepareStatement("");
+            pstat = conn.prepareStatement("UPDATE card_asset SET card_money = card_money + ? WHERE card_num = ?");
             pstat.setInt(1, money);
             pstat.setString(2, cardNum);
             pstat.execute();
