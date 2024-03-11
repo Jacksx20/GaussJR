@@ -55,6 +55,7 @@ public class CardAsset {
         }
     }
 
+    // 客户开卡时，新增一条存/取款信息
     public boolean insertCardAsset(String card_number) {
         PreparedStatement pstat = null;
 
