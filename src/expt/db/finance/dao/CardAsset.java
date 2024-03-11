@@ -14,12 +14,14 @@ public class CardAsset {
         conn = connection;
     }
 
+    // 完成“查询客户卡余额”功能模块
     public ResultSet queryCardAssetList(int clientId) {
         PreparedStatement pstat = null;
         ResultSet rs = null;
 
         try {
-            pstat = conn.prepareStatement("");
+            pstat = conn.prepareStatement(
+                    "select b_number as 银行卡号, b_type as 卡片类型, card_money as 账户余额, moneytype as 币种 from bank_card inner join card_asset on b_number = card_num where b_client_id = ?");
             pstat.setInt(1, clientId);
             rs = pstat.executeQuery();
         } catch (SQLException ex) {
@@ -32,9 +34,9 @@ public class CardAsset {
         return rs;
     }
 
-    public boolean queryDepositAndWithdrawal(String cardNum,int action,int money) {
+    public boolean queryDepositAndWithdrawal(String cardNum, int action, int money) {
         PreparedStatement pstat = null;
-        if (action == 2){
+        if (action == 2) {
             money = 0 - money;
         }
         try {
@@ -52,7 +54,8 @@ public class CardAsset {
             return Const.FAILED;
         }
     }
-    public boolean insertCardAsset (String card_number){
+
+    public boolean insertCardAsset(String card_number) {
         PreparedStatement pstat = null;
 
         try {
@@ -73,7 +76,8 @@ public class CardAsset {
             return Const.FAILED;
         }
     }
-    public boolean deleteCardAsset (String card_number){
+
+    public boolean deleteCardAsset(String card_number) {
         PreparedStatement pstat = null;
 
         try {
