@@ -44,7 +44,7 @@
 
 5、card_asset(card_num，card_money，moneytype)
 
----------编译是解决"编码 GBK 的不可映射字符"问题
+---------解决"编码 GBK 的不可映射字符"问题（-encoding utf-8）
 
 ```
 cd src/expt/db/finance/
