@@ -58,4 +58,5 @@ java -p /d/Desktop/GaussJR/libs/opengauss-jdbc-2.0.0.jar expt.db.finance.initDat
 java -p /d/Desktop/GaussJR/libs/opengauss-jdbc-2.0.0.jar expt.db.finance.testDAO
 java -p /d/Desktop/GaussJR/libs/opengauss-jdbc-2.0.0.jar expt.db.finance.launch
 ```
-优化建议 2024.6.21 from TommyNike 10:55
+优化建议 2024.6.21 from TommyNike 10:58 test
+
